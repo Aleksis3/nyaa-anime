@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from "./AnimeItem.module.css";
+import styles from "./SuggestedItem.module.css";
 import { useNavigate, Link } from "react-router-dom";
 
-function AnimeItem(props) {
+function SuggestedItem(props) {
   const [hoveredId, setHoveredId] = useState("");
   const [mouseMoved, setMouseMoved] = useState(false);
 
@@ -44,11 +44,9 @@ function AnimeItem(props) {
         key={props.key}
         id={props.id}
       >
-        <div className={styles["anime-item__title-container"]}>
-          <p className={styles["anime-item__title"]}>
-            {shortenedTitle(props.title)}
-          </p>
-        </div>
+        <p className={styles["anime-item__title"]}>
+          {shortenedTitle(props.title)}
+        </p>
         <div className={styles["anime-img__container"]}>
           <img
             className={styles["anime-item__img"]}
@@ -71,4 +69,4 @@ function AnimeItem(props) {
   );
 }
 
-export default AnimeItem;
+export default SuggestedItem;

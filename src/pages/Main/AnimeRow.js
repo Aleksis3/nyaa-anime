@@ -1,29 +1,45 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import AnimeItem from "./AnimeItem";
 import styles from "./AnimeRow.module.css";
 import { SampleNextArrow } from "./AnimeRowArrows";
-var settings = {
+
+const settings = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 6,
+  slidesToShow: 5,
   slidesToScroll: 6,
-  prevArrow: <SampleNextArrow />,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
 function AnimeRow(props) {
   const [animeList, setAnimeList] = useState([]);
-  const [isHovering, setIsHovering] = useState(false);
-  const [hoveredId, setHoveredId] = useState("");
-
-  const handleMouseOver = (e) => {
-    console.log(e.target.offsetParent.id);
-    setHoveredId(e.target.offsetParent.id);
-  };
-
-  const handleMouseOut = () => {
-    setHoveredId("");
-  };
 
   useEffect(() => {
     async function getAnime() {
@@ -43,34 +59,19 @@ function AnimeRow(props) {
   };
 
   const animeEls = animeList.map((anime) => (
-    <div
-      onMouseOver={(anime) => handleMouseOver(anime)}
-      onMouseOut={handleMouseOut}
-      className={styles["anime-item"]}
+    <AnimeItem
       key={anime.mal_id}
       id={anime.mal_id}
-    >
-      <p className={styles["anime-item__title"]}>
-        {shortenedTitle(anime.title)}
-      </p>
-      <div className={styles["anime-img__container"]}>
-        <img
-          className={styles["anime-item__img"]}
-          src={`${anime.images.jpg.image_url}`}
-          alt="Anime's cover image"
-          id={anime.mal_id}
-        />
-      </div>
-      <div
-        className={
-          anime.mal_id == hoveredId
-            ? styles["anime-item__full-name"]
-            : styles["hidden"]
-        }
-      >
-        {anime.title}
-      </div>
-    </div>
+      type={anime.type}
+      title={anime.title}
+      titleEnglish={anime.title_english}
+      desc={anime.synopsis}
+      score={anime.score}
+      episodes={anime.episodes}
+      duration={anime.duration}
+      img={anime.images.jpg.image_url}
+      largeImg={anime.images.jpg.large_image_url}
+    />
   ));
 
   return (
@@ -81,7 +82,6 @@ function AnimeRow(props) {
           {animeEls}
         </Slider>
       </div>
-      {/* <ul>{animeEls}</ul> */}
     </section>
   );
 }

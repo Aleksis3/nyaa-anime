@@ -1,0 +1,71 @@
+.anime-details {
+  display: flex;
+  max-width: 120rem;
+  font-size: 2rem;
+  margin: 3rem auto 0 auto;
+  background-color: #fff;
+}
+
+.anime-details-left {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  border: 1px #000 solid;
+  padding: 5rem;
+}
+
+.anime-details__img {
+  max-width: 30rem;
+}
+
+.anime-details__list {
+  padding: 1rem;
+}
+
+.anime-details-right {
+  width: 90%;
+  padding: 1rem;
+}
+
+.anime-details__title {
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px gray solid;
+}
+
+.anime-details__alt-title {
+  margin-top: 1rem;
+  border-bottom: 1px gray solid;
+}
+
+.anime-details__desc {
+  width: 95%;
+  margin-top: 1rem;
+}
+
+.slider-container {
+  max-width: 120rem;
+  background-color: lightblue;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.slider {
+  margin-top: 1rem;
+}
+
+span {
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+.anime-details__bttn {
+  background-color: purple;
+  padding: 1rem 3rem;
+  margin: 3rem 0 0 3rem;
+}

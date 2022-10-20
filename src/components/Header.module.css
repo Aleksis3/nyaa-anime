@@ -1,7 +1,22 @@
 .header {
-  height: 5rem;
-  background-color: red;
+  min-height: 5rem;
+  background-color: #fff;
+
   border-bottom: 5px black solid;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  cursor: pointer;
+  padding: 1rem;
+  color: #111;
+  font-size: 3rem;
+  margin-left: 5rem;
+}
+
+.logout,
+.register {
+  margin-right: 5rem;
 }
