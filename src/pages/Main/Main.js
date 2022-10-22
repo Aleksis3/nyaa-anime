@@ -1,6 +1,7 @@
 import React from "react";
 import AnimeRow from "./AnimeRow";
 import styles from "./index.module.css";
+
 function Main() {
   return (
     <div className={styles.main}>

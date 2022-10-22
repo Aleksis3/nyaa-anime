@@ -1,22 +1,27 @@
-.list-item {
+.table-row__title {
+  font-weight: 600;
+  width: 35%;
+}
+
+.table__img {
+  max-width: 10rem;
+}
+
+.table-row td {
+  padding-bottom: 5rem;
+  /* padding-left: 3rem; */
+}
+
+/* .list-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 20rem;
-}
-
-/* .list-item__img-container {
-  width: 20rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 5rem;
 } */
 
-.list-item__img {
+/* .list-item__img {
   object-fit: contain;
   max-height: 15rem;
   margin-right: 5rem;
-}
+} */

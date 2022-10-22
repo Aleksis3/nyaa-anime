@@ -1,18 +1,22 @@
-table {
+.table {
+  margin: 5rem auto 0 auto;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
   border: 1px black solid;
-  display: flex;
-  max-width: 120rem;
-  flex-direction: column;
-  margin: 3rem auto 0 auto;
 }
 
-/* .list {
-  align-items: center;
-  flex-direction: column;
+/* increases spacing between thead and tbody */
+.table tbody:before {
+  line-height: 2em;
+  content: ".";
+  color: #eee;
+  display: block;
+}
 
+.table-container {
   display: flex;
   max-width: 120rem;
-  margin: 5rem auto 0 auto;
-  gap: 1rem;
-  border: 1px #000 solid;
-} */
+  margin: 0 auto;
+}

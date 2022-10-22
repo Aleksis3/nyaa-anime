@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./AnimeListItem.module.css";
-import { Timestamp } from "firebase/firestore";
+import { Link } from "react-router-dom";
 function AnimeListItem(props) {
   const dateToString = props.dateAdded.toDate().toLocaleDateString();
-  return (
-    <li className={styles["list-item"]}>
-      <span>{props.title}</span>
-      <span>{props.episodes}</span>
-      <span>{dateToString}</span>
-      <span>{props.status}</span>
-      <span>{props.rating}</span>
 
-      <img src={`${props.img}`} alt="" className={styles["list-item__img"]} />
-    </li>
+  return (
+    <tr className={styles["table-row"]}>
+      <td className={styles["table-row__title"]}>
+        <Link to={`/anime/${props.id}`}>{props.title}</Link>
+      </td>
+      <td>{props.episodes}</td>
+      <td>{props.rating}</td>
+      <td>{dateToString}</td>
+      <td>{props.status}</td>
+      <td>
+        <button onClick={() => props.handleShowModal(props.id)}>Edit</button>
+      </td>
+      <td>
+        <img className={styles["table__img"]} src={`${props.img}`} alt="" />
+      </td>
+    </tr>
   );
 }
 

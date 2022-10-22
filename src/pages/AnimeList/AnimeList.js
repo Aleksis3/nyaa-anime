@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AnimeList.module.css";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
+import Modal from "../../overlays/Modal";
 import AnimeListItem from "./AnimeListItem";
+import UpdateItemForm from "./UpdateItemForm";
+
 function UserList() {
   const [user, loading, error] = useAuthState(auth);
   const [animeList, setAnimeList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editedAnimeId, setEditedAnimeId] = useState();
 
   const collectionRef = collection(db, "users", `${user.uid}`, "anime-list");
 
@@ -20,6 +25,11 @@ function UserList() {
     };
     fetchData();
   }, []);
+
+  function handleShowModal(animeId) {
+    setEditedAnimeId(animeId);
+    setIsModalOpen((prevState) => !prevState);
+  }
 
   console.log(animeList);
   //   useEffect(() => {
@@ -42,11 +52,35 @@ function UserList() {
         key={anime.id}
         img={anime.img}
         dateAdded={anime.dateAdded}
+        handleShowModal={handleShowModal}
       />
     );
   });
 
-  return <table className={styles.table}>{animeListEls}</table>;
+  return (
+    <>
+      {isModalOpen && (
+        <Modal handleShowModal={handleShowModal}>
+          <UpdateItemForm editedAnimeId={editedAnimeId} />
+        </Modal>
+      )}
+      <div className={styles["table-container"]}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Episodes</th>
+              <th>Rating</th>
+              <th>Date added</th>
+              <th>Status</th>
+              <th>head4</th>
+            </tr>
+          </thead>
+          <tbody>{animeListEls}</tbody>
+        </table>
+      </div>
+    </>
+  );
 }
 
 export default UserList;
