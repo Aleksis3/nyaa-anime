@@ -1,19 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./UpdateItemForm.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
-function UpdateItemForm({ editedAnimeId }) {
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+function UpdateItemForm({ editedAnimeId, img, title, id }) {
   // <p>{props.editedAnimeId}</p>
   const [user, loading, error] = useAuthState(auth);
+  const [prevInputData, setPrevInputData] = useState();
+  // const [userInput, setUserInput] = useState({
+  //   status: "",
+  //   episodes: "",
+  //   rating: "",
+  // });
+  const statusRef = useRef();
+  const episodesRef = useRef();
+  const ratingRef = useRef();
 
-  const animeRef = doc(
-    db,
-    "users",
-    `${user.uid}`,
-    "anime-list",
-    `${editedAnimeId}`
-  );
+  const animeRef = doc(db, "users", `${user.uid}`, "anime-list", `${id}`);
+
+  useEffect(() => {
+    const fetchDoc = async () => {
+      try {
+        const docSnap = await getDoc(animeRef);
+        setPrevInputData(docSnap.data());
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+    fetchDoc();
+  }, []);
+  console.log(prevInputData);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,8 +37,21 @@ function UpdateItemForm({ editedAnimeId }) {
       await setDoc(
         animeRef,
         {
-          episodes: 25,
+          ...(episodesRef.current.value.length && {
+            episodes: episodesRef.current.value,
+          }),
+          ...(ratingRef.current.value.length && {
+            rating: ratingRef.current.value,
+          }),
+          ...(statusRef.current.value.length && {
+            status: statusRef.current.value,
+          }),
+          dateAdded: Timestamp.now(),
+          ...(img && { img: img }),
+          ...(title && { title: title }),
+          ...(id && { id: id }),
         },
+
         { merge: true }
       );
     } catch (e) {
@@ -33,33 +62,39 @@ function UpdateItemForm({ editedAnimeId }) {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles["form__item-wrapper"]}>
         <label htmlFor="xd">Episodes</label>
-        <input type="number" id="xd" />
+        <input
+          ref={episodesRef}
+          type="number"
+          id="xd"
+          defaultValue={prevInputData?.episodes}
+        />
+      </div>
+      <div className={styles["form__item-wrapper"]}>
+        <label htmlFor="rating">Rating</label>
+        <select ref={ratingRef} id="rating">
+          <option value="-">-</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
       </div>
       <div className={styles["form__item-wrapper"]}>
         <label htmlFor="xd">Status</label>
-        <select id="xd">
-          <option value="volvo">Watching</option>
-          <option value="saab">Completed</option>
-          <option value="mercedes">Dropped</option>
-          <option value="audi">On Hold</option>
+        <select ref={statusRef} value={prevInputData?.status} id="xd">
+          <option value="Watching">Watching</option>
+          <option value="Completed">Completed</option>
+          <option value="Dropped">Dropped</option>
+          <option value="On hold">On Hold</option>
         </select>
       </div>
-      <div className={styles["form__item-wrapper"]}>
-        <label htmlFor="xd">Rating</label>
-        <select id="xd">
-          <option value="volvo">-</option>
-          <option value="volvo">1</option>
-          <option value="saab">2</option>
-          <option value="mercedes">3</option>
-          <option value="audi">4</option>
-          <option value="volvo">5</option>
-          <option value="saab">6</option>
-          <option value="mercedes">7</option>
-          <option value="audi">8</option>
-          <option value="volvo">9</option>
-          <option value="saab">10</option>
-        </select>
-      </div>
+
       <button type="submit">Submit</button>
     </form>
   );

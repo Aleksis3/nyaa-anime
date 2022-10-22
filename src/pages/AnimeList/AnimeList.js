@@ -17,11 +17,16 @@ function UserList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collectionRef);
-      setAnimeList(querySnapshot);
-      const animeData = [];
-      querySnapshot.forEach((doc) => animeData.push(doc.data()));
-      setAnimeList(animeData);
+      try {
+        onSnapshot(collectionRef, (snapshot) => {
+          const querySnapshot = snapshot.docs;
+          const animeData = [];
+          querySnapshot.forEach((doc) => animeData.push(doc.data()));
+          setAnimeList(animeData);
+        });
+      } catch (e) {
+        alert(e.message);
+      }
     };
     fetchData();
   }, []);
@@ -46,7 +51,7 @@ function UserList() {
       <AnimeListItem
         title={anime.title}
         status={anime.status}
-        rating={anime.ratimg}
+        rating={anime.rating}
         episodes={anime.episodes}
         id={anime.id}
         key={anime.id}
@@ -61,7 +66,7 @@ function UserList() {
     <>
       {isModalOpen && (
         <Modal handleShowModal={handleShowModal}>
-          <UpdateItemForm editedAnimeId={editedAnimeId} />
+          <UpdateItemForm id={editedAnimeId} />
         </Modal>
       )}
       <div className={styles["table-container"]}>
