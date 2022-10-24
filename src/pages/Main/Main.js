@@ -1,5 +1,5 @@
 import React from "react";
-import AnimeRow from "./AnimeRow";
+import AnimeRow from "../../components/AnimeRow";
 
 function Main() {
   return (

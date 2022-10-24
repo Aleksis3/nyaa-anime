@@ -10,7 +10,7 @@ function SuggestedItem(props) {
 
   const handleClick = () => {
     if (!mouseMoved) {
-      navigate(`/anime/${props.id}`, { state: { ...props } });
+      navigate(`/anime/${props.id}`);
     }
   };
 

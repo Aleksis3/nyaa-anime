@@ -89,6 +89,9 @@ span {
   right: 0;
 } */
 
+/* .similiar-anime__container {
+  max-width: 100%;
+} */
 @media only screen and (max-width: 60rem) {
   .anime-details {
     flex-direction: column;

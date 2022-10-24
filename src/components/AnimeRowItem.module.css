@@ -34,6 +34,13 @@
   border-radius: 5px;
 }
 
+.anime-item__img--small {
+  height: 15rem;
+  padding: 0.5rem;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
 @media only screen and (max-width: 1550px) {
   .anime-item__img {
     height: 25rem;

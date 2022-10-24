@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
 import styles from "./AnimeDetails.module.css";
-
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UpdateItemForm from "../../components/UpdateItemForm";
+import AnimeRow from "../../components/AnimeRow";
 
 function AnimeDetails() {
   const [user, loading, error] = useAuthState(auth);
@@ -13,7 +12,7 @@ function AnimeDetails() {
   const [animeData, setAnimeData] = useState();
   // const anime = useLocation().state;
   const { animeId } = useParams();
-  const episodes = animeData?.episodes || "unknown";
+  // const episodes = animeData?.episodes || "unknown";
 
   console.log(animeData);
 
@@ -22,11 +21,16 @@ function AnimeDetails() {
       const data = await fetch(`https://api.jikan.moe/v4/anime/${animeId}`);
       const json = await data.json();
       setAnimeData(json.data);
+      window.scrollTo(0, 0);
     };
     fetchData();
-  }, []);
+  }, [animeId]);
 
   console.log(animeData);
+
+  if (!animeData) {
+    return <p>fsfs</p>;
+  }
 
   if (animeData) {
     return (
@@ -72,6 +76,14 @@ function AnimeDetails() {
             </p>
           )}
           <p className={styles["anime-details__desc"]}>{animeData.synopsis}</p>
+          <div className={styles["similiar-anime__container"]}>
+            <AnimeRow
+              isSmall={true}
+              rowTitle="Similar anime:"
+              query={`anime/${animeId}/recommendations`}
+              isRec={true}
+            ></AnimeRow>
+          </div>
         </div>
       </div>
     );

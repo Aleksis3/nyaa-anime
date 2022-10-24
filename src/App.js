@@ -11,14 +11,16 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/anime/:animeId" element={<AnimeDetails />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/list" element={<AnimeList />} />
-        <Route path="/search/:query" element={<SearchResults />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/anime/:animeId" element={<AnimeDetails />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/list" element={<AnimeList />} />
+          <Route path="/search/:query" element={<SearchResults />} />
+        </Routes>
+      </main>
     </div>
   );
 }

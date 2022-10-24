@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./AnimeItem.module.css";
+import styles from "./AnimeRowItem.module.css";
 import { useNavigate, Link } from "react-router-dom";
 
 function AnimeItem(props) {
@@ -53,7 +53,11 @@ function AnimeItem(props) {
         </div>
         <div className={styles["anime-img__container"]}>
           <img
-            className={styles["anime-item__img"]}
+            className={
+              props.isSmall
+                ? styles["anime-item__img--small"]
+                : styles["anime-item__img"]
+            }
             src={`${props.img}`}
             alt="Anime's cover image"
             id={props.id}
