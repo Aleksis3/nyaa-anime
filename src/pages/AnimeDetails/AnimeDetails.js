@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import { useLocation, useParams } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import styles from "./AnimeDetails.module.css";
-import SuggestedItem from "./SuggestedItem";
-import { db } from "../../firebase";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import UpdateItemForm from "../AnimeList/UpdateItemForm";
+import UpdateItemForm from "../../components/UpdateItemForm";
 
 function AnimeDetails() {
   const [user, loading, error] = useAuthState(auth);
@@ -28,25 +26,6 @@ function AnimeDetails() {
     fetchData();
   }, []);
 
-  // const handleAddTitle = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await setDoc(
-  //       doc(db, "users", `${user.uid}`, "anime-list", `${animeData.mal_id}`),
-  //       {
-  //         title: animeData.title,
-  //         episodes: `4/${episodes}`,
-  //         status: "watching",
-  //         id: animeData.mal_id,
-  //         img: animeData.images.jpg.image_url,
-  //         dateAdded: Timestamp.now(),
-  //       }
-  //     );
-  //   } catch (err) {
-  //     alert(err);
-  //   }
-  // };
-
   console.log(animeData);
 
   if (animeData) {
@@ -66,9 +45,24 @@ function AnimeDetails() {
               <span>Episodes:</span> {animeData.episodes || "Unknown"}
             </li>
             <li>
+              <span>Year:</span> {animeData.year}
+            </li>
+            <li>
               <span>Duration:</span> {animeData.duration}
             </li>
+            <li>
+              <span>Status:</span> {animeData.status}
+            </li>
           </ul>
+          {user && (
+            <div className={styles["form-container"]}>
+              <UpdateItemForm
+                id={animeData.mal_id}
+                img={animeData.images.jpg.image_url}
+                title={animeData.title}
+              />
+            </div>
+          )}
         </div>
         <div className={styles["anime-details-right"]}>
           <p className={styles["anime-details__title"]}>{animeData.title}</p>
@@ -78,22 +72,6 @@ function AnimeDetails() {
             </p>
           )}
           <p className={styles["anime-details__desc"]}>{animeData.synopsis}</p>
-
-          {/* <div>
-            <button
-              onClick={handleAddTitle}
-              className={styles["anime-details__bttn"]}
-            >
-              +Add to list
-            </button>
-          </div> */}
-          {user && (
-            <UpdateItemForm
-              id={animeData.mal_id}
-              img={animeData.images.jpg.image_url}
-              title={animeData.title}
-            />
-          )}
         </div>
       </div>
     );

@@ -26,8 +26,15 @@ html {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ul {
   list-style: none;
+}
+
+@media (max-width: 62.5rem) {
+  html {
+    font-size: 50%;
+  }
 }

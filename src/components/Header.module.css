@@ -1,22 +1,59 @@
 .header {
   min-height: 5rem;
   background-color: #fff;
-
   border-bottom: 5px black solid;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  background-image: linear-gradient(315deg, #fad0c4 0%, #f1a7f1 74%);
 }
 
 .logo {
   cursor: pointer;
   padding: 1rem;
-  color: #111;
+  color: #333;
   font-size: 3rem;
   margin-left: 5rem;
 }
 
-.logout,
+.header__input {
+  display: flex;
+  padding: 0.5rem;
+  margin: 0 2rem 0 2rem;
+  flex: 0 1 40rem;
+}
+
+.buttons {
+  margin-right: 5rem;
+}
+
+/* .logout,
 .register {
   margin-right: 5rem;
+} */
+
+@media only screen and (max-width: 56.25rem) {
+  .header {
+    flex-direction: column;
+  }
+  .logo {
+    margin: 0 auto;
+  }
+  .header__input {
+    width: 80%;
+    flex-basis: 2rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .buttons {
+    order: 2;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+  }
+  .button {
+    padding: 1rem 3rem;
+  }
 }

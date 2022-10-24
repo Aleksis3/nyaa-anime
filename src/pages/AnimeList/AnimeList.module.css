@@ -5,14 +5,22 @@
   text-align: center;
   padding: 1rem;
   border: 1px black solid;
+  /* border-spacing: 30px; */
+  /* border-collapse: collapse; */
 }
 
 /* increases spacing between thead and tbody */
+
 .table tbody:before {
-  line-height: 2em;
+  line-height: 0.5rem;
   content: ".";
   color: #eee;
   display: block;
+}
+
+th {
+  border-left: 1.5rem solid transparent;
+  border-top: 1.5rem solid transparent;
 }
 
 .table-container {

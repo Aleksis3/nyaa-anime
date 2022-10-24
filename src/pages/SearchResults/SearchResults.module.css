@@ -1,0 +1,16 @@
+.results {
+  display: flex;
+  max-width: 120rem;
+  border: 1px #111 solid;
+  margin: 1rem auto 0 auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results__title {
+  padding: 1rem;
+}
+
+.results__list {
+  width: 95%;
+}

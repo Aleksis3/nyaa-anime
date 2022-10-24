@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eebefa;
+  font-size: 2rem;
+  border: 1px purple solid;
+}
+
+.form label {
+  margin: 0 auto 0.6rem auto;
+}
+
+.form__item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.5rem;
+}
+
+.form__item-wrapper input,
+.form__item-wrapper select {
+  padding: 0.3rem;
+}
+
+.form__items-wrapper {
+  display: flex;
+}
+
+.form__btn {
+  align-self: stretch;
+  padding: 0.7rem;
+}

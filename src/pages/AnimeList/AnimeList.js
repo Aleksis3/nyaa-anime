@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase";
 import Modal from "../../overlays/Modal";
 import AnimeListItem from "./AnimeListItem";
-import UpdateItemForm from "./UpdateItemForm";
+import UpdateItemForm from "../../components/UpdateItemForm";
 
 function UserList() {
   const [user, loading, error] = useAuthState(auth);
@@ -63,7 +63,7 @@ function UserList() {
   });
 
   return (
-    <>
+    <div style={{ overflowX: "auto" }}>
       {isModalOpen && (
         <Modal handleShowModal={handleShowModal}>
           <UpdateItemForm id={editedAnimeId} />
@@ -78,13 +78,12 @@ function UserList() {
               <th>Rating</th>
               <th>Date added</th>
               <th>Status</th>
-              <th>head4</th>
             </tr>
           </thead>
           <tbody>{animeListEls}</tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
 

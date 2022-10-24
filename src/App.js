@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import AnimeDetails from "./pages/AnimeDetails/AnimeDetails";
 import Register from "./pages/Register/Register";
 import AnimeList from "./pages/AnimeList/AnimeList";
+import SearchResults from "./pages/SearchResults/SearchResults";
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<AnimeList />} />
+        <Route path="/search/:query" element={<SearchResults />} />
       </Routes>
     </div>
   );

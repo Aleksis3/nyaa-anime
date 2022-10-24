@@ -1,12 +1,16 @@
 import React from "react";
 import AnimeRow from "./AnimeRow";
-import styles from "./index.module.css";
 
 function Main() {
   return (
-    <div className={styles.main}>
+    <div>
       <AnimeRow rowTitle="Currently airing:" query="seasons/now" />
       <AnimeRow rowTitle="Top Anime:" query="top/anime" />
+      <AnimeRow rowTitle="Romance Anime:" query="anime?genres=23"></AnimeRow>
+      <AnimeRow
+        rowTitle="Summer 2022 Anime:"
+        query="seasons/2022/summer"
+      ></AnimeRow>
     </div>
   );
 }

@@ -5,34 +5,41 @@ import styles from "./AnimeRow.module.css";
 import { SampleNextArrow } from "./AnimeRowArrows";
 
 const settings = {
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 5,
   slidesToScroll: 6,
   responsive: [
+    // {
+    //   breakpoint: 1024,
+    //   settings: {
+    //     slidesToShow: 4,
+    //     slidesToScroll: 4,
+    //     infinite: true,
+    //     dots: false,
+    //   },
+    // },
     {
-      breakpoint: 1024,
+      breakpoint: 650,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: 4,
+        slidesToScroll: 4,
         initialSlide: 2,
       },
     },
     {
-      breakpoint: 480,
+      breakpoint: 500,
       settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+      },
+    },
+    {
+      breakpoint: 410,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
       },
     },
   ],
@@ -62,15 +69,9 @@ function AnimeRow(props) {
     <AnimeItem
       key={anime.mal_id}
       id={anime.mal_id}
-      type={anime.type}
       title={anime.title}
-      titleEnglish={anime.title_english}
       desc={anime.synopsis}
-      score={anime.score}
-      episodes={anime.episodes}
-      duration={anime.duration}
       img={anime.images.jpg.image_url}
-      largeImg={anime.images.jpg.large_image_url}
     />
   ));
 

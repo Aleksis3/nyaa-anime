@@ -5,7 +5,6 @@ import { useNavigate, Link } from "react-router-dom";
 function AnimeItem(props) {
   const [hoveredId, setHoveredId] = useState("");
   const [mouseMoved, setMouseMoved] = useState(false);
-
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -34,7 +33,10 @@ function AnimeItem(props) {
     <Link
       style={{ textDecoration: "none" }}
       onMouseMove={() => setMouseMoved(true)}
+      onTouchMove={() => setMouseMoved(true)}
       onMouseDown={() => setMouseMoved(false)}
+      onTouchStart={() => setMouseMoved(false)}
+      onTouchEnd={() => handleClick()}
       onMouseUp={() => handleClick()}
     >
       <div
