@@ -64,17 +64,18 @@ function AnimeDetails() {
                 id={animeData.mal_id}
                 img={animeData.images.jpg.image_url}
                 title={animeData.title}
+                episodesCount={animeData.episodes}
               />
             </div>
           )}
         </div>
         <div className={styles["anime-details-right"]}>
           <p className={styles["anime-details__title"]}>{animeData.title}</p>
-          {animeData.title !== animeData.titleEnglish && (
+          {/* {animeData.title !== animeData.title_english && (
             <p className={styles["anime-details__alt-title"]}>
-              {animeData.titleEnglish}
+              {animeData.title_english}
             </p>
-          )}
+          )} */}
           <p className={styles["anime-details__desc"]}>{animeData.synopsis}</p>
           <div className={styles["similiar-anime__container"]}>
             <AnimeRow

@@ -4,6 +4,21 @@ import { Link } from "react-router-dom";
 function AnimeListItem(props) {
   const dateToString = props.dateAdded.toDate().toLocaleDateString();
 
+  let statusColor;
+  switch (props.status) {
+    case "Completed":
+      statusColor = "green";
+      break;
+    case "Plan to Watch":
+      statusColor = "gray";
+      break;
+    case "Dropped":
+      statusColor = "red";
+      break;
+    case "On hold":
+      statusColor = "yellow";
+      break;
+  }
   return (
     <tr className={styles["table-row"]}>
       <td className={styles["table-row__title"]}>
@@ -12,9 +27,14 @@ function AnimeListItem(props) {
       <td>{props.episodes}</td>
       <td>{props.rating}</td>
       <td>{dateToString}</td>
-      <td>{props.status}</td>
+      <td className={styles[statusColor]}>{props.status}</td>
       <td>
-        <button onClick={() => props.handleShowModal(props.id)}>Edit</button>
+        <button
+          className={styles["table__btn"]}
+          onClick={() => props.handleShowModal(props.id)}
+        >
+          Edit
+        </button>
       </td>
       <td>
         <img className={styles["table__img"]} src={`${props.img}`} alt="" />

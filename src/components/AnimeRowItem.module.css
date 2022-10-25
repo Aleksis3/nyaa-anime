@@ -17,7 +17,8 @@
   font-weight: 800;
   text-align: center;
   padding: 1rem;
-  color: purple;
+  /* color: purple; */
+  color: #333;
 }
 
 .anime-img__container {

@@ -5,6 +5,7 @@
   margin: 3rem auto 0 auto;
   background-color: #fff;
   height: fit-content;
+
   padding-bottom: 2rem;
 }
 
@@ -60,19 +61,6 @@
   margin-top: 1rem;
 }
 
-.slider-container {
-  max-width: 120rem;
-  background-color: lightblue;
-  margin: 0 auto;
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 1rem;
-}
-
-.slider {
-  margin-top: 1rem;
-}
-
 span {
   font-weight: bold;
   margin-right: 2px;
@@ -83,16 +71,8 @@ span {
   align-self: flex-end;
   margin: 2rem 0 0 auto;
 }
-/* .form-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-} */
 
-/* .similiar-anime__container {
-  max-width: 100%;
-} */
-@media only screen and (max-width: 60rem) {
+@media only screen and (max-width: 70rem) {
   .anime-details {
     flex-direction: column;
     align-items: center;

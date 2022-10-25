@@ -3,7 +3,7 @@ import styles from "./UpdateItemForm.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase";
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
-function UpdateItemForm({ editedAnimeId, img, title, id, detailsPage }) {
+function UpdateItemForm({ img, title, id, episodesCount }) {
   // <p>{props.editedAnimeId}</p>
   const [user, loading, error] = useAuthState(auth);
   const [oldInputData, setOldInputData] = useState();
@@ -74,6 +74,7 @@ function UpdateItemForm({ editedAnimeId, img, title, id, detailsPage }) {
               onChange={inputDataHandler}
               type="number"
               min="0"
+              max={episodesCount}
               id="episodes"
               value={inputData?.episodes}
             />
@@ -108,6 +109,7 @@ function UpdateItemForm({ editedAnimeId, img, title, id, detailsPage }) {
               id="xd"
             >
               <option value="Watching">Watching</option>
+              <option value="Plan to Watch">Plan to Watch</option>
               <option value="Completed">Completed</option>
               <option value="Dropped">Dropped</option>
               <option value="On hold">On Hold</option>

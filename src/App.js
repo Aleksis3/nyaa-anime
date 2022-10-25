@@ -7,6 +7,7 @@ import AnimeDetails from "./pages/AnimeDetails/AnimeDetails";
 import Register from "./pages/Register/Register";
 import AnimeList from "./pages/AnimeList/AnimeList";
 import SearchResults from "./pages/SearchResults/SearchResults";
+import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
           <Route path="/search/:query" element={<SearchResults />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

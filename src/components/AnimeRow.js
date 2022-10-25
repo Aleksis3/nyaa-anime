@@ -4,59 +4,72 @@ import AnimeRowItem from "./AnimeRowItem";
 import styles from "./AnimeRow.module.css";
 import { SampleNextArrow } from "../pages/Main/AnimeRowArrows";
 
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 6,
-  responsive: [
-    // {
-    //   breakpoint: 1024,
-    //   settings: {
-    //     slidesToShow: 4,
-    //     slidesToScroll: 4,
-    //     infinite: true,
-    //     dots: false,
-    //   },
-    // },
-    {
-      breakpoint: 650,
-      settings: {
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        initialSlide: 2,
-      },
-    },
-    {
-      breakpoint: 500,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-      },
-    },
-    {
-      breakpoint: 410,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-  ],
-};
-
 function AnimeRow(props) {
   const [animeList, setAnimeList] = useState([]);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    ...(animeList?.length < 5
+      ? { slidesToShow: animeList?.length }
+      : { slidesToShow: 5 }),
+    // slidesToShow: 5,
+    slidesToScroll: 5,
+    responsive: [
+      // {
+      //   breakpoint: 1024,
+      //   settings: {
+      //     slidesToShow: 4,
+      //     slidesToScroll: 4,
+      //     infinite: true,
+      //     dots: false,
+      //   },
+      // },
+      {
+        breakpoint: 650,
+        settings: {
+          ...(animeList?.length < 4
+            ? { slidesToShow: animeList?.length }
+            : { slidesToShow: 4 }),
+          slidesToScroll: 4,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          ...(animeList?.length < 3
+            ? { slidesToShow: animeList?.length }
+            : { slidesToShow: 3 }),
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 410,
+        settings: {
+          ...(animeList?.length < 2
+            ? { slidesToShow: animeList?.length }
+            : { slidesToShow: 2 }),
+          slidesToScroll: 2,
+        },
+      },
+    ],
+  };
 
   useEffect(() => {
     async function getAnime() {
       const response = await fetch(`https://api.jikan.moe/v4/${props.query}`);
-      const data = await response.json();
-      setAnimeList(data.data);
-      console.log(data.data);
+      if (response.status >= 200 && response.status <= 299) {
+        const data = await response.json();
+        setAnimeList(data.data);
+        console.log(data.data);
+      } else {
+        console.log(response.statusText);
+        throw Error(response.statusText);
+      }
     }
-    getAnime();
-  }, []);
+    getAnime().catch(alert.error);
+  }, [props.query]);
 
   const shortenedTitle = (title) => {
     if (title.length < 20) {
@@ -65,7 +78,7 @@ function AnimeRow(props) {
     return title.substring(20, 0) + "...";
   };
 
-  const animeEls = animeList.map((anime) =>
+  const animeEls = animeList?.map((anime) =>
     props.isRec ? (
       <AnimeRowItem
         key={anime.entry.mal_id}

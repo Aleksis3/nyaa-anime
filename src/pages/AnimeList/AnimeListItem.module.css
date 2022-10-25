@@ -34,3 +34,23 @@ tr td:first-child {
   max-height: 15rem;
   margin-right: 5rem;
 } */
+
+.table__btn {
+  padding: 0.5rem 1.8rem;
+}
+
+.green {
+  color: green;
+}
+
+.gray {
+  color: rgb(116, 116, 116);
+}
+
+.yellow {
+  color: #fab005;
+}
+
+.red {
+  color: #fa5252;
+}
