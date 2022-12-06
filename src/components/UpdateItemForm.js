@@ -9,7 +9,7 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
   const [oldInputData, setOldInputData] = useState();
   const [inputData, setInputData] = useState({
     rating: "",
-    episodes: null,
+    episodes: 0,
     status: "",
   });
 

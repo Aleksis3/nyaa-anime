@@ -26,7 +26,7 @@ function SearchResults() {
   const searchItemsEls = titles.map((title) => {
     return (
       <SearchResultItem
-        desc={title.synopsis}
+        desc={title.synopsis || ""}
         title={title.title}
         type={title.type}
         img={title.images.jpg.image_url}

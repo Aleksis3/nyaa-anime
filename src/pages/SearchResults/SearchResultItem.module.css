@@ -1,3 +1,4 @@
+@import url(./../../vars.css);
 .item {
   display: flex;
   border-collapse: collapse;
@@ -6,7 +7,8 @@
   font-size: 1.5rem;
   height: 15rem;
   margin: 1rem 0;
-  border: 1px #111 solid;
+
+  border-top: 1px var(--color-secondary) solid;
 }
 
 .img {
@@ -21,10 +23,22 @@
   font-weight: bold;
 }
 
+.type {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
 .a {
   display: flex;
   flex-direction: column;
 
   width: 100%;
   justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .item {
+    height: 28rem;
+  }
 }

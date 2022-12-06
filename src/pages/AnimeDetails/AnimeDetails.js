@@ -29,37 +29,39 @@ function AnimeDetails() {
   console.log(animeData);
 
   if (!animeData) {
-    return <p>fsfs</p>;
+    return <p>There was some error while loading the page...</p>;
   }
 
   if (animeData) {
     return (
       <div className={styles["anime-details"]}>
         <div className={styles["anime-details-left"]}>
-          <img
-            className={styles["anime-details__img"]}
-            src={`${animeData.images.jpg.large_image_url}`}
-            alt="Anime cover image"
-          ></img>
-          <ul className={styles["anime-details__list"]}>
-            <li>
-              <span>Type:</span> {animeData.type}
-            </li>
-            <li>
-              <span>Episodes:</span> {animeData.episodes || "Unknown"}
-            </li>
-            <li>
-              <span>Year:</span> {animeData.year}
-            </li>
-            <li>
-              <span>Duration:</span> {animeData.duration}
-            </li>
-            <li>
-              <span>Status:</span> {animeData.status}
-            </li>
-          </ul>
+          <div className={styles["test"]}>
+            <img
+              className={styles["anime-details__img"]}
+              src={`${animeData.images.jpg.large_image_url}`}
+              alt="Anime cover image"
+            ></img>
+            <ul className={styles["anime-details__list"]}>
+              <li>
+                <span>Type:</span> {animeData.type || "Unknown"}
+              </li>
+              <li>
+                <span>Episodes:</span> {animeData.episodes || "Unknown"}
+              </li>
+              <li>
+                <span>Year:</span> {animeData.year || "?"}
+              </li>
+              <li>
+                <span>Duration:</span> {animeData.duration || "?"}
+              </li>
+              <li>
+                <span>Status:</span> {animeData.status || "Unknown"}
+              </li>
+            </ul>
+          </div>
           {user && (
-            <div className={styles["form-container"]}>
+            <div className={styles["anime-details__form-container"]}>
               <UpdateItemForm
                 id={animeData.mal_id}
                 img={animeData.images.jpg.image_url}
@@ -71,11 +73,6 @@ function AnimeDetails() {
         </div>
         <div className={styles["anime-details-right"]}>
           <p className={styles["anime-details__title"]}>{animeData.title}</p>
-          {/* {animeData.title !== animeData.title_english && (
-            <p className={styles["anime-details__alt-title"]}>
-              {animeData.title_english}
-            </p>
-          )} */}
           <p className={styles["anime-details__desc"]}>{animeData.synopsis}</p>
           <div className={styles["similiar-anime__container"]}>
             <AnimeRow

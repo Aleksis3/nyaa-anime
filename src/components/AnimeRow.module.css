@@ -1,15 +1,17 @@
+@import "./../vars.css";
+
 .slider {
-  width: 90%;
+  width: 86%;
   margin: auto;
-  background-color: #fff;
-  border: 1px #333 dashed;
-  /* #9c36b5  */
 }
 
 .anime-row {
+  max-width: 140rem;
   padding: 0.5rem;
-  max-width: 130rem;
-  margin: 0 auto;
+  margin: 2rem auto;
+  background-color: white;
+  /* box-shadow: 12px 20px 10px -19px rgba(66, 68, 90, 1); */
+  box-shadow: 12px 20px 10px -19px rgba(66, 68, 90, 1);
 }
 
 .anime-row--small {
@@ -20,10 +22,20 @@
 }
 
 .anime-row__title {
-  font-size: 2rem;
-  padding: 1rem;
-  color: #862e9c;
-  color: #871f78;
+  font-size: 2.35rem;
+  font-weight: 500;
+  border: 1px #862e9c solid;
+  background-color: var(--color-primary);
+  padding: 1.25rem;
+  color: #fff;
+}
+
+.anime-row__loading {
+  font-size: 1.7rem;
+}
+
+.anime-row__empty {
+  margin-top: 3.5rem;
 }
 
 .hidden {

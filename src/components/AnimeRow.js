@@ -6,6 +6,7 @@ import { SampleNextArrow } from "../pages/Main/AnimeRowArrows";
 
 function AnimeRow(props) {
   const [animeList, setAnimeList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const settings = {
     dots: false,
     infinite: true,
@@ -63,6 +64,7 @@ function AnimeRow(props) {
         const data = await response.json();
         setAnimeList(data.data);
         console.log(data.data);
+        setIsLoading(false);
       } else {
         console.log(response.statusText);
         throw Error(response.statusText);
@@ -99,9 +101,9 @@ function AnimeRow(props) {
     )
   );
 
-  if (animeList <= 0) {
-    return <p>Loading...</p>;
-  }
+  // if (animeList <= 0) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <section
@@ -111,9 +113,16 @@ function AnimeRow(props) {
     >
       <h3 className={styles["anime-row__title"]}>{props.rowTitle}</h3>
       <div className={styles["slider-container"]}>
-        <Slider className={styles.slider} {...settings}>
-          {animeEls}
-        </Slider>
+        {isLoading && (
+          <p className={styles["anime-row__loading"]}>Loading...</p>
+        )}
+        {!isLoading && animeList <= 0 ? (
+          <p className={styles["anime-row__empty"]}>No titles were found!</p>
+        ) : (
+          <Slider className={styles.slider} {...settings}>
+            {animeEls}
+          </Slider>
+        )}
       </div>
     </section>
   );

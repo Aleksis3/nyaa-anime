@@ -21,6 +21,7 @@
 .form__item-wrapper input,
 .form__item-wrapper select {
   padding: 0.3rem;
+  max-width: 12rem;
 }
 
 .form__items-wrapper {
