@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./AnimeDetails.module.css";
-import { auth } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import UpdateItemForm from "../../components/UpdateItemForm";
 import AnimeRow from "../../components/AnimeRow";
+import AuthContext from "../../context/AuthContext";
 
 function AnimeDetails() {
-  const [user, loading, error] = useAuthState(auth);
+  const user = useContext(AuthContext);
   const [similars, setSimilars] = useState([]);
   const [animeData, setAnimeData] = useState();
   // const anime = useLocation().state;
@@ -51,6 +50,9 @@ function AnimeDetails() {
               </li>
               <li>
                 <span>Year:</span> {animeData.year || "?"}
+              </li>
+              <li>
+                <span>Source:</span> {animeData.source || "Unknown"}
               </li>
               <li>
                 <span>Duration:</span> {animeData.duration || "?"}

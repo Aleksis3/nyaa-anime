@@ -101,10 +101,6 @@ function AnimeRow(props) {
     )
   );
 
-  // if (animeList <= 0) {
-  //   return <p>Loading...</p>;
-  // }
-
   return (
     <section
       className={

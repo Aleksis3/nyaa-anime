@@ -1,10 +1,12 @@
+@import url("../vars.css");
+
 .footer {
   display: flex;
   align-items: center;
   height: 2.5rem;
   padding: 1rem;
   color: white;
-  background-color: purple;
+  background-color: var(--color-secondary);
   margin-top: auto;
   border-top: 2px #000 solid;
 }

@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./AnimeList.module.css";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../../firebase";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { db } from "../../firebase";
 import Modal from "../../overlays/Modal";
 import AnimeListItem from "./AnimeListItem";
 import UpdateItemForm from "../../components/UpdateItemForm";
+import AuthContext from "../../context/AuthContext";
 
 function UserList() {
-  const [user, loading, error] = useAuthState(auth);
   const [animeList, setAnimeList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editedAnimeId, setEditedAnimeId] = useState();
-
+  const [sortBy, setSortBy] = useState();
+  const user = useContext(AuthContext);
   const collectionRef = collection(db, "users", `${user.uid}`, "anime-list");
 
+  const sort = (title) => {};
+  const q = query(collectionRef, orderBy("title"));
   useEffect(() => {
     const fetchData = async () => {
       try {
-        onSnapshot(collectionRef, (snapshot) => {
+        onSnapshot(q, (snapshot) => {
           const querySnapshot = snapshot.docs;
           const animeData = [];
           querySnapshot.forEach((doc) => animeData.push(doc.data()));
-          setAnimeList(animeData);
+          setAnimeList(animeData.reverse());
+
+          console.log(q.docs());
         });
       } catch (e) {
         alert(e.message);
@@ -69,6 +73,10 @@ function UserList() {
           <UpdateItemForm id={editedAnimeId} />
         </Modal>
       )}
+      <div>
+        <p>Sort by:</p>
+        <button></button>
+      </div>
       <div className={styles["table-container"]}>
         <table className={styles.table}>
           <thead>

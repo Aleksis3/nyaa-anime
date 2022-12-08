@@ -7,11 +7,7 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
   // <p>{props.editedAnimeId}</p>
   const [user, loading, error] = useAuthState(auth);
   const [oldInputData, setOldInputData] = useState();
-  const [inputData, setInputData] = useState({
-    rating: "",
-    episodes: 0,
-    status: "",
-  });
+  const [inputData, setInputData] = useState({});
 
   const inputDataHandler = (e) => {
     setInputData((prevInputData) => ({
@@ -26,15 +22,19 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
     const fetchDoc = async () => {
       try {
         const docSnap = await getDoc(animeRef);
-        setOldInputData(docSnap.data());
-        setInputData(docSnap.data());
+        // setOldInputData(docSnap.data());
+        console.log(docSnap);
+        {
+          docSnap._document
+            ? setInputData(docSnap.data())
+            : setInputData({ rating: "-", episodes: "0", status: "Watching" });
+        }
       } catch (e) {
         alert(e.message);
       }
     };
     fetchDoc();
-  }, []);
-  console.log(oldInputData);
+  }, [id]);
 
   async function handleSubmit(e) {
     e.preventDefault();

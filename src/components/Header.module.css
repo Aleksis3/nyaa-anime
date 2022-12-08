@@ -1,3 +1,5 @@
+@import url("../vars.css");
+
 .header {
   min-height: 5rem;
   background-color: #fff;
@@ -28,9 +30,20 @@
 }
 
 .buttons {
+  display: flex;
+  gap: 1.5rem;
   margin-right: 5rem;
 }
 
+.button {
+  background-color: white;
+  color: black;
+  border: 1px black solid;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 1rem 1.8rem;
+}
 /* .logout,
 .register {
   margin-right: 5rem;

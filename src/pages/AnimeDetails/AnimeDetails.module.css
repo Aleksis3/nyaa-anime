@@ -30,8 +30,8 @@
 .anime-details__list {
   padding: 1rem;
   font-size: 2rem;
-  border-bottom: 1px #888 solid;
-  border-top: 1px #888 solid;
+  border-bottom: 1px purple solid;
+  border-top: 1px purple solid;
 }
 
 .anime-details__list > *:not(:last-child) {
@@ -89,14 +89,25 @@ span {
   .anime-details {
     flex-direction: column;
     align-items: center;
+    background-color: #eee;
   }
 
   .anime-details-left {
-    text-align: center;
-    align-items: center;
     padding: 1rem 0 0 0;
     position: relative;
-    width: 80%;
+    width: 90%;
+    background-color: #fff;
+    padding: 0;
+  }
+
+  .test {
+    display: flex;
+    padding: 0;
+    flex-direction: row;
+  }
+
+  .anime-details__img {
+    border-right: 5px purple solid;
   }
 
   .anime-details__form-container {
@@ -105,9 +116,7 @@ span {
     flex: 1 1 0;
   }
   .anime-details__list {
-    align-self: flex-start;
-    text-align: left;
-    margin: 2.5rem 0 0 0rem;
+    border: none;
   }
 
   .anime-details__img {

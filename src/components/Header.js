@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "./../firebase";
-import { getAuth } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-
+import AuthContext from "../context/AuthContext";
 function Header() {
-  const auth = getAuth();
+  const user = useContext(AuthContext);
   const navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
 
   const searchInputHandler = (e) => {
     if (e.key === "Enter") {
@@ -16,6 +13,7 @@ function Header() {
       e.target.value = "";
     }
   };
+
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.logo}>
