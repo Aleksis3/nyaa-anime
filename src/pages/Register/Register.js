@@ -1,52 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 import { registerWithEmailAndPassword, auth } from "../../firebase";
-import "./Register.css";
+import styles from "./Register.module.css";
+
 function Register() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const user = useContext(AuthContext);
   const navigate = useNavigate();
   const register = () => {
-    if (!name) alert("Please enter name");
+    if (!name) return alert("Please enter name");
+    if (password !== confirmPassword) {
+      return alert("Passwords must match!");
+    }
+    if (password.length < 6) {
+      return alert("Password should be at least 6 characters long!");
+    }
     registerWithEmailAndPassword(name, email, password);
   };
   useEffect(() => {
-    if (loading) return;
+    // if (loading) return;
     if (user) navigate("/", { replace: true });
-  }, [user, loading]);
+  }, [user]);
   return (
-    <div className="register">
-      <div className="register__container">
+    <div className={styles["register"]}>
+      <div className={styles["register__container"]}>
         <input
           type="text"
-          className="register__textBox"
+          className={styles["register__textBox"]}
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
         />
         <input
           type="text"
-          className="register__textBox"
+          className={styles["register__textBox"]}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="register__textBox"
+          className={styles["register__textBox"]}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
+        <input
+          type="password"
+          className={styles["register__textBox"]}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Confirm Password"
+        />
+        <button className={styles["register__btn"]} onClick={register}>
           Register
         </button>
-
-        <div>
-          Already have an account? <Link to="/">Login</Link> now.
+        <div className={styles["register__login"]}>
+          Already have an account? <Link to="/login">Login now</Link>
         </div>
       </div>
     </div>

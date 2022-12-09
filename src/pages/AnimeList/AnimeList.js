@@ -4,16 +4,23 @@ import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 import Modal from "../../overlays/Modal";
 import AnimeListItem from "./AnimeListItem";
-import UpdateItemForm from "../../components/UpdateItemForm";
+import UpdateItemForm from "../../components/UpdateItemForm/UpdateItemForm";
 import AuthContext from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function UserList() {
   const [animeList, setAnimeList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editedAnimeId, setEditedAnimeId] = useState();
-  const [sortBy, setSortBy] = useState();
+
   const user = useContext(AuthContext);
-  const collectionRef = collection(db, "users", `${user.uid}`, "anime-list");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
+
+  const collectionRef = collection(db, "users", `${user?.uid}`, "anime-list");
 
   const sort = (title) => {};
   const q = query(collectionRef, orderBy("title"));
@@ -41,14 +48,6 @@ function UserList() {
   }
 
   console.log(animeList);
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const docSnap = await getDoc(docRef);
-  //       console.log(docSnap.data());
-  //       setAnimeList(docSnap.data());
-  //     };
-  //     fetchData();
-  //   }, []);
 
   const animeListEls = animeList.map((anime) => {
     return (
@@ -70,7 +69,7 @@ function UserList() {
     <div style={{ overflowX: "auto" }}>
       {isModalOpen && (
         <Modal handleShowModal={handleShowModal}>
-          <UpdateItemForm id={editedAnimeId} />
+          <UpdateItemForm id={editedAnimeId} closeModal={handleShowModal} />
         </Modal>
       )}
       <div>

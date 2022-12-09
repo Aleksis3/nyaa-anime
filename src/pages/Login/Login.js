@@ -1,48 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import "./Login.css";
+import { logInWithEmailAndPassword } from "../../firebase";
+import AuthContext from "../../context/AuthContext";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const user = useContext(AuthContext);
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
-    }
     if (user) navigate("/");
-  }, [user, loading]);
+  }, [user]);
+
   return (
-    <div className="login">
-      <div className="login__container">
+    <div className={styles["login"]}>
+      <div className={styles["login__container"]}>
         <input
           type="text"
-          className="login__textBox"
+          className={styles["login__textBox"]}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="login__textBox"
+          className={styles["login__textBox"]}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         <button
-          className="login__btn"
+          className={styles["login__btn"]}
           onClick={() => logInWithEmailAndPassword(email, password)}
         >
           Login
         </button>
 
-        <div>
-          <Link to="/reset">Forgot Password</Link>
-        </div>
-        <div>
+        <div className={styles["login__register"]}>
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
       </div>

@@ -1,3 +1,5 @@
+@import url(../../vars.css);
+
 .form {
   display: flex;
   flex-direction: column;
@@ -31,4 +33,12 @@
 .form__btn {
   align-self: stretch;
   padding: 0.7rem;
+  border: none;
+
+  font-weight: bold;
+}
+
+.form__btn-submit {
+  color: white;
+  background-color: var(--color-primary);
 }

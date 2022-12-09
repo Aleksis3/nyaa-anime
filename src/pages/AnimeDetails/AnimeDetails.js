@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./AnimeDetails.module.css";
-import UpdateItemForm from "../../components/UpdateItemForm";
-import AnimeRow from "../../components/AnimeRow";
+import UpdateItemForm from "../../components/UpdateItemForm/UpdateItemForm";
+import AnimeRow from "../../components/AnimeRow/AnimeRow";
 import AuthContext from "../../context/AuthContext";
 
 function AnimeDetails() {

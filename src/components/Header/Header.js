@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import styles from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "./../firebase";
-import AuthContext from "../context/AuthContext";
+import { logout } from "../../firebase";
+import AuthContext from "../../context/AuthContext";
+import Button from "../Button/Button";
 function Header() {
   const user = useContext(AuthContext);
   const navigate = useNavigate();
@@ -28,12 +29,10 @@ function Header() {
       {!user && (
         <div className={styles.buttons}>
           <Link to="/register">
-            <button className={(styles.register, styles.button)}>
-              Register
-            </button>
+            <Button>Register</Button>
           </Link>
           <Link to="/login">
-            <button className={styles.button}>Login</button>
+            <Button>Login</Button>
           </Link>
         </div>
       )}

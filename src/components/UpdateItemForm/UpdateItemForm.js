@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./UpdateItemForm.module.css";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../firebase";
+import { db } from "../../firebase";
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
-function UpdateItemForm({ img, title, id, episodesCount }) {
-  // <p>{props.editedAnimeId}</p>
-  const [user, loading, error] = useAuthState(auth);
-  const [oldInputData, setOldInputData] = useState();
+import AuthContext from "../../context/AuthContext";
+
+function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
+  const user = useContext(AuthContext);
   const [inputData, setInputData] = useState({});
+  const [animateBtn, setAnimateBtn] = useState(false);
 
   const inputDataHandler = (e) => {
     setInputData((prevInputData) => ({
@@ -22,8 +22,6 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
     const fetchDoc = async () => {
       try {
         const docSnap = await getDoc(animeRef);
-        // setOldInputData(docSnap.data());
-        console.log(docSnap);
         {
           docSnap._document
             ? setInputData(docSnap.data())
@@ -38,7 +36,9 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
+      setAnimateBtn(true);
       await setDoc(
         animeRef,
         {
@@ -59,6 +59,11 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
 
         { merge: true }
       );
+
+      setTimeout(() => setAnimateBtn(false), 100);
+      {
+        handleShowModal && handleShowModal();
+      }
     } catch (e) {
       alert(e.message);
     }
@@ -117,7 +122,12 @@ function UpdateItemForm({ img, title, id, episodesCount }) {
           </div>
         </div>
       </div>
-      <button type="submit" className={styles["form__btn"]}>
+      <button
+        type="submit"
+        className={`${styles.form__btn} ${
+          animateBtn ? styles["form__btn-submit"] : ""
+        }`}
+      >
         Submit
       </button>
     </form>

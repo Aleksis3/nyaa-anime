@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import AnimeRowItem from "./AnimeRowItem";
 import styles from "./AnimeRow.module.css";
-import { SampleNextArrow } from "../pages/Main/AnimeRowArrows";
 
 function AnimeRow(props) {
   const [animeList, setAnimeList] = useState([]);

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Children } from "react";
+import { cloneElement } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
 function Modal(props) {
@@ -8,7 +9,12 @@ function Modal(props) {
         <button onClick={props.handleShowModal} class="close">
           &times;
         </button>
-        {props.children}
+        {Children.map(props.children, (child) => {
+          return cloneElement(child, {
+            ...child.props,
+            handleShowModal: props.handleShowModal,
+          });
+        })}
       </div>
     </div>,
     document.getElementById("overlays")

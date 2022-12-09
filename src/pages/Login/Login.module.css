@@ -1,6 +1,6 @@
 .login {
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,9 +8,11 @@
 .login__container {
   display: flex;
   flex-direction: column;
+  min-width: 30%;
   text-align: center;
-  background-color: #dcdcdc;
-  padding: 30px;
+  background-color: var(--color-primary);
+  padding: 3rem;
+  border-radius: 10px;
 }
 .login__textBox {
   padding: 10px;
@@ -23,11 +25,11 @@
   margin-bottom: 10px;
   border: none;
   color: white;
+  cursor: pointer;
   background-color: black;
 }
-.login__google {
-  background-color: #4285f4;
-}
-.login div {
-  margin-top: 7px;
+
+.login__register {
+  font-size: 1.5rem;
+  color: white;
 }
