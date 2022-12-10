@@ -38,9 +38,9 @@ function Login() {
           Login
         </button>
 
-        <div className={styles["login__register"]}>
-          Don't have an account? <Link to="/register">Register</Link> now.
-        </div>
+        <p className={styles["login__register"]}>
+          Don't have an account? <Link to="/register">Register now </Link>
+        </p>
       </div>
     </div>
   );

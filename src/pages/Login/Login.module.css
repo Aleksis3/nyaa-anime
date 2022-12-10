@@ -1,3 +1,5 @@
+@import url("../../vars.css");
+
 .login {
   height: 90vh;
   width: 100%;
@@ -32,4 +34,8 @@
 .login__register {
   font-size: 1.5rem;
   color: white;
+}
+
+.login__register > a {
+  color: var(--color-link-light);
 }

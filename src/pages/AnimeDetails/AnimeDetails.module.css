@@ -70,8 +70,26 @@ span {
 
 .anime-details__form-container {
   padding: 0;
-  align-self: flex-end;
-  margin: 2rem 0 0 auto;
+  /* align-self: flex-end;
+  margin: 2rem 0 0 auto; */
+}
+
+.anime-details__form-container {
+  padding: 0;
+  /* align-self: flex-end;
+  margin: 2rem 0 0 auto; */
+}
+
+.anime-details__login-prompt {
+  font-weight: bold;
+  margin-top: 1rem;
+  font-size: 1.8rem;
+}
+
+.anime-details__login-prompt > a {
+  color: var(--color-link-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
 }
 
 .similiar-anime__container {
@@ -98,6 +116,13 @@ span {
     width: 90%;
     background-color: #fff;
     padding: 0;
+  }
+
+  .anime-details__login-prompt {
+    text-align: center;
+    border-top: 1px black solid;
+    padding: 1rem 0 1rem 0;
+    font-size: 2rem;
   }
 
   .test {

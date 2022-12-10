@@ -37,3 +37,8 @@
   font-size: 1.5rem;
   color: white;
 }
+
+.register__login > a {
+  font-size: 1.5rem;
+  color: var(--color-link-light);
+}

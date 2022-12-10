@@ -4,7 +4,7 @@ import styles from "./AnimeDetails.module.css";
 import UpdateItemForm from "../../components/UpdateItemForm/UpdateItemForm";
 import AnimeRow from "../../components/AnimeRow/AnimeRow";
 import AuthContext from "../../context/AuthContext";
-
+import { Link } from "react-router-dom";
 function AnimeDetails() {
   const user = useContext(AuthContext);
   const [similars, setSimilars] = useState([]);
@@ -62,16 +62,21 @@ function AnimeDetails() {
               </li>
             </ul>
           </div>
-          {user && (
-            <div className={styles["anime-details__form-container"]}>
+
+          <div className={styles["anime-details__form-container"]}>
+            {user ? (
               <UpdateItemForm
                 id={animeData.mal_id}
                 img={animeData.images.jpg.image_url}
                 title={animeData.title}
                 episodesCount={animeData.episodes}
               />
-            </div>
-          )}
+            ) : (
+              <p className={styles["anime-details__login-prompt"]}>
+                You must me <Link to="/login">logged in</Link> to edit your list
+              </p>
+            )}
+          </div>
         </div>
         <div className={styles["anime-details-right"]}>
           <p className={styles["anime-details__title"]}>{animeData.title}</p>

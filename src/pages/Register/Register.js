@@ -33,7 +33,7 @@ function Register() {
           className={styles["register__textBox"]}
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
+          placeholder="Username"
         />
         <input
           type="text"
@@ -59,9 +59,9 @@ function Register() {
         <button className={styles["register__btn"]} onClick={register}>
           Register
         </button>
-        <div className={styles["register__login"]}>
+        <p className={styles["register__login"]}>
           Already have an account? <Link to="/login">Login now</Link>
-        </div>
+        </p>
       </div>
     </div>
   );

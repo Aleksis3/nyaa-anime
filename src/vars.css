@@ -1,4 +1,6 @@
 :root {
   --color-primary: #862e9c;
   --color-secondary: #871f78;
+  --color-link-light: rgb(0, 183, 255);
+  --color-link-dark: rgb(0, 33, 255);
 }
