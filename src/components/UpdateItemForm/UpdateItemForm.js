@@ -7,13 +7,22 @@ import AuthContext from "../../context/AuthContext";
 function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
   const user = useContext(AuthContext);
   const [inputData, setInputData] = useState({});
+
   const [animateBtn, setAnimateBtn] = useState(false);
 
   const inputDataHandler = (e) => {
-    setInputData((prevInputData) => ({
-      ...prevInputData,
-      [e.target.name]: e.target.value,
-    }));
+    // Ensures episodes type to be int for a proper sorting
+    if ((e.target.id === "rating") & (e.target.value !== "-")) {
+      setInputData((prevInputData) => ({
+        ...prevInputData,
+        [e.target.id]: parseInt(e.target.value),
+      }));
+    } else {
+      setInputData((prevInputData) => ({
+        ...prevInputData,
+        [e.target.id]: e.target.value,
+      }));
+    }
   };
 
   const animeRef = doc(db, "users", `${user.uid}`, "anime-list", `${id}`);
@@ -45,13 +54,16 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
           ...(inputData.episodes && {
             episodes: inputData.episodes,
           }),
+          ...(episodesCount && {
+            episodesCount: episodesCount,
+          }),
           ...(inputData.rating && {
             rating: inputData.rating,
           }),
           ...(inputData.status && {
             status: inputData.status,
           }),
-          dateAdded: Timestamp.now(),
+          dateUpdated: Timestamp.now(),
           ...(img && { img: img }),
           ...(title && { title: title }),
           ...(id && { id: id }),
@@ -75,43 +87,40 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
           <div className={styles["form__item-wrapper"]}>
             <label htmlFor="episodes">Episodes</label>
             <input
-              name="episodes"
               onChange={inputDataHandler}
               type="number"
               min="0"
               max={episodesCount}
               id="episodes"
-              value={inputData?.episodes}
+              value={inputData.episodes}
             />
           </div>
           <div className={styles["form__item-wrapper"]}>
             <label htmlFor="rating">Rating</label>
             <select
               id="rating"
-              name="rating"
               onChange={inputDataHandler}
               value={inputData?.rating}
             >
               <option value="-">-</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={6}>6</option>
+              <option value={7}>7</option>
+              <option value={8}>8</option>
+              <option value={9}>9</option>
+              <option value={10}>10</option>
             </select>
           </div>
           <div className={styles["form__item-wrapper"]}>
             <label htmlFor="status">Status</label>
             <select
-              name="status"
               onChange={inputDataHandler}
               value={inputData?.status}
-              id="xd"
+              id="status"
             >
               <option value="Watching">Watching</option>
               <option value="Plan to Watch">Plan to Watch</option>

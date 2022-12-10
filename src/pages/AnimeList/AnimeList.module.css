@@ -1,3 +1,18 @@
+.queries-container {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  gap: 1.5rem;
+
+  margin: 3rem auto 0 auto;
+}
+
+.queries-container__select {
+  height: 2.4rem;
+}
+
 .table {
   margin: 5rem auto 0 auto;
   width: 100%;

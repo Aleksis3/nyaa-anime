@@ -12,7 +12,8 @@ function UserList() {
   const [animeList, setAnimeList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editedAnimeId, setEditedAnimeId] = useState();
-
+  const [sortBy, setSortBy] = useState("title");
+  const [sortOrder, setSortOrder] = useState("asc");
   const user = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ function UserList() {
   const collectionRef = collection(db, "users", `${user?.uid}`, "anime-list");
 
   const sort = (title) => {};
-  const q = query(collectionRef, orderBy("title"));
+  const q = query(collectionRef, orderBy(sortBy));
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,16 +32,18 @@ function UserList() {
           const querySnapshot = snapshot.docs;
           const animeData = [];
           querySnapshot.forEach((doc) => animeData.push(doc.data()));
-          setAnimeList(animeData.reverse());
-
-          console.log(q.docs());
+          if (sortOrder === "asc") {
+            setAnimeList(animeData);
+          } else {
+            setAnimeList(animeData.reverse());
+          }
         });
       } catch (e) {
         alert(e.message);
       }
     };
     fetchData();
-  }, []);
+  }, [sortBy, sortOrder]);
 
   function handleShowModal(animeId) {
     setEditedAnimeId(animeId);
@@ -56,10 +59,11 @@ function UserList() {
         status={anime.status}
         rating={anime.rating}
         episodes={anime.episodes}
+        episodesCount={anime.episodesCount}
         id={anime.id}
         key={anime.id}
         img={anime.img}
-        dateAdded={anime.dateAdded}
+        dateUpdated={anime.dateUpdated}
         handleShowModal={handleShowModal}
       />
     );
@@ -72,9 +76,27 @@ function UserList() {
           <UpdateItemForm id={editedAnimeId} closeModal={handleShowModal} />
         </Modal>
       )}
-      <div>
-        <p>Sort by:</p>
-        <button></button>
+      <div className={styles["queries-container"]}>
+        <label htmlFor="queries">Sort by:</label>
+        <select
+          id="queries"
+          className={styles["queries-container__select"]}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="title">Title</option>
+          <option value="rating">Rating</option>
+          <option value="status">Status</option>
+          <option value="dateUpdated">Date Updated</option>
+        </select>
+        <label htmlFor="order">Order:</label>
+        <select
+          id="order"
+          className={styles["queries-container__select"]}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="asc"> {String.fromCharCode(8593)} </option>
+          <option value="desc"> {String.fromCharCode(8595)} </option>
+        </select>
       </div>
       <div className={styles["table-container"]}>
         <table className={styles.table}>
@@ -83,7 +105,7 @@ function UserList() {
               <th>Title</th>
               <th>Episodes</th>
               <th>Rating</th>
-              <th>Date added</th>
+              <th>Date updated</th>
               <th>Status</th>
             </tr>
           </thead>
