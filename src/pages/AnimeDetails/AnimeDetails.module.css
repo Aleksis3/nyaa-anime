@@ -2,13 +2,17 @@
 
 .anime-details {
   display: flex;
-
   max-width: 120rem;
   font-size: 2rem;
   margin: 3rem auto 0 auto;
   background-color: #fff;
   height: fit-content;
   padding-bottom: 2rem;
+}
+
+.anime-details__error {
+  font-size: 1.8rem;
+  margin: 4rem 0 0 3rem;
 }
 
 .anime-details-left {

@@ -4,6 +4,7 @@ import styles from "./SearchResults.module.css";
 import SearchResultItem from "./SearchResultItem";
 function SearchResults() {
   const [titles, setTitles] = useState([]);
+  const [isLoading, setisLoading] = useState(true);
   const params = useParams();
   const query = params.query;
 
@@ -19,6 +20,7 @@ function SearchResults() {
       } catch (e) {
         alert(e.message);
       }
+      setisLoading(false);
     };
     fetchData();
   }, []);
@@ -38,6 +40,11 @@ function SearchResults() {
 
   return (
     <div className={styles.results}>
+      {isLoading && (
+        <h1 className={styles["results__title"]}>
+          Waiting for the data to load...
+        </h1>
+      )}
       {titles.length > 0 && (
         <>
           <h1 className={styles["results__title"]}>
@@ -46,7 +53,7 @@ function SearchResults() {
           <ul className={styles["results__list"]}>{searchItemsEls}</ul>
         </>
       )}
-      {!titles.length && (
+      {!titles.length && !isLoading && (
         <h1 className={styles["results__title"]}>
           Sadly, there doesn't seem to be any titles matching the searched
           phrase

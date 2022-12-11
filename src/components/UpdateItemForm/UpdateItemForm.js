@@ -100,7 +100,7 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
             <select
               id="rating"
               onChange={inputDataHandler}
-              value={inputData?.rating}
+              value={inputData.rating}
             >
               <option value="-">-</option>
               <option value={1}>1</option>
@@ -119,7 +119,7 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
             <label htmlFor="status">Status</label>
             <select
               onChange={inputDataHandler}
-              value={inputData?.status}
+              value={inputData.status}
               id="status"
             >
               <option value="Watching">Watching</option>

@@ -7,29 +7,26 @@ import styles from "./AnimeRow.module.css";
 function AnimeRow(props) {
   const [animeList, setAnimeList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
 
   useEffect(() => {
     async function getAnime() {
-      const response = await fetch(`https://api.jikan.moe/v4/${props.query}`);
-      if (response.status >= 200 && response.status <= 299) {
+      try {
+        const response = await fetch(`https://api.jikan.moe/v4/${props.query}`);
+        if (!response.ok) {
+          const e = response.json();
+          throw e;
+        }
         const data = await response.json();
         setAnimeList(data.data);
         console.log(data.data);
-        setIsLoading(false);
-      } else {
-        console.log(response.statusText);
-        throw Error(response.statusText);
+      } catch (e) {
+        setError(e.message);
       }
+      setIsLoading(false);
     }
-    getAnime().catch(alert.error);
+    getAnime();
   }, [props.query]);
-
-  // const shortenedTitle = (title) => {
-  //   if (title.length < 20) {
-  //     return title;
-  //   }
-  //   return title.substring(20, 0) + "...";
-  // };
 
   const animeEls = animeList?.map((anime) =>
     props.isRec ? (
@@ -51,6 +48,10 @@ function AnimeRow(props) {
       />
     )
   );
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <section

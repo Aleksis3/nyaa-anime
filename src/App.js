@@ -8,6 +8,7 @@ import Login from "./pages/Signing/Login";
 import AnimeList from "./pages/AnimeList/AnimeList";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import Footer from "./components/Footer/Footer";
+import NotFound from "./pages/NotFound/NotFound";
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/list" element={<AnimeList />} />
           <Route path="/search/:query" element={<SearchResults />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

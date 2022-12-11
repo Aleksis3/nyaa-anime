@@ -1,0 +1,16 @@
+@import url("../../vars.css");
+
+.not-found {
+  text-align: center;
+}
+.not-found__header {
+  font-size: 4.5rem;
+  letter-spacing: -0.3px;
+  margin: 10rem 0 5rem 0;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.not-found__header span {
+  color: var(--color-primary);
+}

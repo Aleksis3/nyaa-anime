@@ -8,24 +8,36 @@ import { Link } from "react-router-dom";
 function AnimeDetails() {
   const user = useContext(AuthContext);
   const [animeData, setAnimeData] = useState();
+  const [error, setError] = useState();
   const { animeId } = useParams();
 
   console.log(animeData);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch(`https://api.jikan.moe/v4/anime/${animeId}`);
-      const json = await data.json();
-      setAnimeData(json.data);
-      window.scrollTo(0, 0);
+      try {
+        const data = await fetch(`https://api.jikan.moe/v4/anime/${animeId}`);
+
+        if (!data.ok) {
+          const e = await data.json();
+          throw e;
+        }
+
+        const json = await data.json();
+        setAnimeData(json.data);
+        window.scrollTo(0, 0);
+      } catch (e) {
+        setError(e.message);
+        console.log(e.message);
+      }
     };
     fetchData();
   }, [animeId]);
 
   console.log(animeData);
 
-  if (!animeData) {
-    return <p>There was some error while loading the page...</p>;
+  if (error) {
+    return <p className={styles["anime-details__error"]}>Error: {error}</p>;
   }
 
   if (animeData) {
