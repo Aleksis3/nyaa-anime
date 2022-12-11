@@ -23,7 +23,7 @@ function SearchResults() {
       setisLoading(false);
     };
     fetchData();
-  }, []);
+  }, [query]);
 
   const searchItemsEls = titles.map((title) => {
     return (

@@ -4,14 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase";
 import AuthContext from "../../context/AuthContext";
 import Button from "../Button/Button";
+import { useState } from "react";
 function Header() {
   const user = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const [query, setQuery] = useState();
 
   const searchInputHandler = (e) => {
     if (e.key === "Enter") {
       navigate(`/search/${e.target.value}`);
       e.target.value = "";
+      e.target.blur();
     }
   };
 
@@ -24,7 +28,7 @@ function Header() {
         className={styles.header__input}
         type="text"
         placeholder="Search for a specific title"
-        onKeyPress={searchInputHandler}
+        onKeyDown={searchInputHandler}
       />
       {!user && (
         <div className={styles.buttons}>
