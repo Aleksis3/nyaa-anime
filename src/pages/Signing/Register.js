@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { registerWithEmailAndPassword, auth } from "../../firebase";
-import styles from "./Register.module.css";
+import { registerWithEmailAndPassword } from "../../firebase";
+import styles from "./SigningForm.module.css";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -25,41 +25,42 @@ function Register() {
     // if (loading) return;
     if (user) navigate("/", { replace: true });
   }, [user]);
+
   return (
-    <div className={styles["register"]}>
-      <div className={styles["register__container"]}>
+    <div className={styles["form"]}>
+      <div className={styles["form__container"]}>
         <input
           type="text"
-          className={styles["register__textBox"]}
+          className={styles["form__textBox"]}
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Username"
         />
         <input
           type="text"
-          className={styles["register__textBox"]}
+          className={styles["form__textBox"]}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className={styles["register__textBox"]}
+          className={styles["form__textBox"]}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         <input
           type="password"
-          className={styles["register__textBox"]}
+          className={styles["form__textBox"]}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Confirm Password"
         />
-        <button className={styles["register__btn"]} onClick={register}>
+        <button className={styles["form__btn"]} onClick={register}>
           Register
         </button>
-        <p className={styles["register__login"]}>
+        <p className={styles["form__switch-form"]}>
           Already have an account? <Link to="/login">Login now</Link>
         </p>
       </div>

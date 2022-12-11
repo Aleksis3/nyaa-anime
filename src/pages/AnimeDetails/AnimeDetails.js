@@ -7,11 +7,8 @@ import AuthContext from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 function AnimeDetails() {
   const user = useContext(AuthContext);
-  const [similars, setSimilars] = useState([]);
   const [animeData, setAnimeData] = useState();
-  // const anime = useLocation().state;
   const { animeId } = useParams();
-  // const episodes = animeData?.episodes || "unknown";
 
   console.log(animeData);
 

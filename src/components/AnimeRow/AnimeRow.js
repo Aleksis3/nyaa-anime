@@ -1,60 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import AnimeRowItem from "./AnimeRowItem";
+import sliderSettings from "./sliderSettings";
 import styles from "./AnimeRow.module.css";
 
 function AnimeRow(props) {
   const [animeList, setAnimeList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    ...(animeList?.length < 5
-      ? { slidesToShow: animeList?.length }
-      : { slidesToShow: 5 }),
-    // slidesToShow: 5,
-    slidesToScroll: 5,
-    responsive: [
-      // {
-      //   breakpoint: 1024,
-      //   settings: {
-      //     slidesToShow: 4,
-      //     slidesToScroll: 4,
-      //     infinite: true,
-      //     dots: false,
-      //   },
-      // },
-      {
-        breakpoint: 650,
-        settings: {
-          ...(animeList?.length < 4
-            ? { slidesToShow: animeList?.length }
-            : { slidesToShow: 4 }),
-          slidesToScroll: 4,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 500,
-        settings: {
-          ...(animeList?.length < 3
-            ? { slidesToShow: animeList?.length }
-            : { slidesToShow: 3 }),
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 410,
-        settings: {
-          ...(animeList?.length < 2
-            ? { slidesToShow: animeList?.length }
-            : { slidesToShow: 2 }),
-          slidesToScroll: 2,
-        },
-      },
-    ],
-  };
 
   useEffect(() => {
     async function getAnime() {
@@ -72,12 +24,12 @@ function AnimeRow(props) {
     getAnime().catch(alert.error);
   }, [props.query]);
 
-  const shortenedTitle = (title) => {
-    if (title.length < 20) {
-      return title;
-    }
-    return title.substring(20, 0) + "...";
-  };
+  // const shortenedTitle = (title) => {
+  //   if (title.length < 20) {
+  //     return title;
+  //   }
+  //   return title.substring(20, 0) + "...";
+  // };
 
   const animeEls = animeList?.map((anime) =>
     props.isRec ? (
@@ -114,7 +66,7 @@ function AnimeRow(props) {
         {!isLoading && animeList <= 0 ? (
           <p className={styles["anime-row__empty"]}>No titles were found!</p>
         ) : (
-          <Slider className={styles.slider} {...settings}>
+          <Slider className={styles.slider} {...sliderSettings(animeList)}>
             {animeEls}
           </Slider>
         )}

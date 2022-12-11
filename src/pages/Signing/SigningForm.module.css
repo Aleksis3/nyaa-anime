@@ -1,14 +1,16 @@
 @import url("../../vars.css");
 
-.login {
-  height: 90vh;
+.form {
+  height: 60vh;
   width: 100%;
+  margin-top: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.login__container {
+.form__container {
   display: flex;
+  border: 2px black solid;
   flex-direction: column;
   min-width: 30%;
   text-align: center;
@@ -16,12 +18,14 @@
   padding: 3rem;
   border-radius: 10px;
 }
-.login__textBox {
+
+.form__textBox {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
 }
-.login__btn {
+
+.form__btn {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
@@ -31,11 +35,12 @@
   background-color: black;
 }
 
-.login__register {
+.form__switch-form {
   font-size: 1.5rem;
   color: white;
 }
 
-.login__register > a {
+.form__switch-form > a {
+  font-size: 1.5rem;
   color: var(--color-link-light);
 }

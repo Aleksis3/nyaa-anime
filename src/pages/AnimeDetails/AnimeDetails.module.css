@@ -13,6 +13,7 @@
 
 .anime-details-left {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   border: 1px #111 solid;
   padding: 2rem;
@@ -97,15 +98,9 @@ span {
 }
 
 @media only screen and (max-width: 70rem) {
-  .similiar-anime__container {
-    max-width: 55rem;
-    margin: 5rem auto;
-  }
-}
-
-@media only screen and (max-width: 40rem) {
   .anime-details {
     flex-direction: column;
+
     align-items: center;
     background-color: #eee;
   }
@@ -113,7 +108,7 @@ span {
   .anime-details-left {
     padding: 1rem 0 0 0;
     position: relative;
-    width: 90%;
+    width: 55%;
     background-color: #fff;
     padding: 0;
   }
@@ -149,6 +144,22 @@ span {
   }
 
   .similiar-anime__container {
+    max-width: none;
+  }
+}
+
+@media only screen and (max-width: 55rem) {
+  .anime-details {
+    margin-top: 1rem;
+  }
+  .anime-details-left {
+    max-width: 70%;
+  }
+}
+
+@media only screen and (max-width: 40rem) {
+  .anime-details-left {
+    width: 90%;
     max-width: none;
   }
 }

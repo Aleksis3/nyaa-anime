@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import styles from "./Login.module.css";
+import styles from "./SigningForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { logInWithEmailAndPassword } from "../../firebase";
 import AuthContext from "../../context/AuthContext";
@@ -15,30 +15,30 @@ function Login() {
   }, [user]);
 
   return (
-    <div className={styles["login"]}>
-      <div className={styles["login__container"]}>
+    <div className={styles["form"]}>
+      <div className={styles["form__container"]}>
         <input
           type="text"
-          className={styles["login__textBox"]}
+          className={styles["form__textBox"]}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className={styles["login__textBox"]}
+          className={styles["form__textBox"]}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         <button
-          className={styles["login__btn"]}
+          className={styles["form__btn"]}
           onClick={() => logInWithEmailAndPassword(email, password)}
         >
           Login
         </button>
 
-        <p className={styles["login__register"]}>
+        <p className={styles["form__switch-form"]}>
           Don't have an account? <Link to="/register">Register now </Link>
         </p>
       </div>

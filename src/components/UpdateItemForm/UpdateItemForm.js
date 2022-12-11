@@ -90,7 +90,7 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
               onChange={inputDataHandler}
               type="number"
               min="0"
-              max={episodesCount}
+              max={inputData.episodesCount || episodesCount}
               id="episodes"
               value={inputData.episodes}
             />
