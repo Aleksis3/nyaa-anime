@@ -3,22 +3,11 @@ export default function sliderSettings(animeList) {
     dots: false,
     infinite: true,
     speed: 500,
-
     ...(animeList?.length < 5
       ? { slidesToShow: animeList?.length }
       : { slidesToShow: 5 }),
-    // slidesToShow: 5,
     slidesToScroll: 5,
     responsive: [
-      // {
-      //   breakpoint: 1024,
-      //   settings: {
-      //     slidesToShow: 4,
-      //     slidesToScroll: 4,
-      //     infinite: true,
-      //     dots: false,
-      //   },
-      // },
       {
         breakpoint: 650,
         settings: {

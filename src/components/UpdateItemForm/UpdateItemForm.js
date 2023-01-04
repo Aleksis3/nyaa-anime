@@ -7,11 +7,12 @@ import AuthContext from "../../context/AuthContext";
 function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
   const user = useContext(AuthContext);
   const [inputData, setInputData] = useState({});
-
   const [animateBtn, setAnimateBtn] = useState(false);
 
   const inputDataHandler = (e) => {
-    // Ensures episodes type to be int for a proper sorting
+    // Sets input data object and ensures that rating types are ints for a proper sorting
+    // as the "select--option" HTML markup seems to always be returning
+    // strings
     if ((e.target.id === "rating") & (e.target.value !== "-")) {
       setInputData((prevInputData) => ({
         ...prevInputData,
@@ -27,6 +28,9 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
 
   const animeRef = doc(db, "users", `${user.uid}`, "anime-list", `${id}`);
 
+  // checks if user has already added this title to his list
+  // to populate the inputs with according info, and if he 'd not -
+  // provides defaults
   useEffect(() => {
     const fetchDoc = async () => {
       try {
@@ -43,9 +47,10 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
     fetchDoc();
   }, [id]);
 
+  // updates the user's list anime info
+  // and fires the button animation when done
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       setAnimateBtn(true);
       await setDoc(
@@ -71,7 +76,6 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
 
         { merge: true }
       );
-
       setTimeout(() => setAnimateBtn(false), 100);
       {
         handleShowModal && handleShowModal();
@@ -80,6 +84,7 @@ function UpdateItemForm({ img, title, id, episodesCount, handleShowModal }) {
       alert(e.message);
     }
   }
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div>

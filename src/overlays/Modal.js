@@ -6,7 +6,10 @@ function Modal(props) {
   return createPortal(
     <div id="myModal" className={styles.modal}>
       <div className={styles["modal-content"]}>
-        <button onClick={props.handleShowModal} class="close">
+        <button
+          className={styles["modal-close"]}
+          onClick={props.handleShowModal}
+        >
           &times;
         </button>
         {Children.map(props.children, (child) => {

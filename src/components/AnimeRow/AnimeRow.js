@@ -10,24 +10,25 @@ function AnimeRow(props) {
   const [error, setError] = useState();
 
   useEffect(() => {
-    async function getAnime() {
+    const getAnime = async () => {
       try {
         const response = await fetch(`https://api.jikan.moe/v4/${props.query}`);
         if (!response.ok) {
-          const e = response.json();
+          const e = await response.json();
           throw e;
         }
         const data = await response.json();
         setAnimeList(data.data);
-        console.log(data.data);
       } catch (e) {
         setError(e.message);
       }
       setIsLoading(false);
-    }
+    };
     getAnime();
   }, [props.query]);
 
+  // the structure of recommended titles returned from the API
+  // varies a bit from the one from other queries
   const animeEls = animeList?.map((anime) =>
     props.isRec ? (
       <AnimeRowItem
@@ -49,10 +50,6 @@ function AnimeRow(props) {
     )
   );
 
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
   return (
     <section
       className={
@@ -61,11 +58,14 @@ function AnimeRow(props) {
     >
       <h3 className={styles["anime-row__title"]}>{props.rowTitle}</h3>
       <div className={styles["slider-container"]}>
-        {isLoading && (
-          <p className={styles["anime-row__loading"]}>Loading...</p>
+        {error && (
+          <p className={styles["anime-row__status"]}>
+            <span>Error:</span> {error}
+          </p>
         )}
-        {!isLoading && animeList <= 0 ? (
-          <p className={styles["anime-row__empty"]}>No titles were found!</p>
+        {isLoading && <p className={styles["anime-row__status"]}>Loading...</p>}
+        {!isLoading && !error && animeList <= 0 ? (
+          <p className={styles["anime-row__status"]}>No titles were found!</p>
         ) : (
           <Slider className={styles.slider} {...sliderSettings(animeList)}>
             {animeEls}

@@ -10,7 +10,6 @@
   padding: 0.5rem;
   margin: 2rem auto;
   background-color: white;
-  /* box-shadow: 12px 20px 10px -19px rgba(66, 68, 90, 1); */
   box-shadow: 12px 20px 10px -19px rgba(66, 68, 90, 1);
 }
 
@@ -31,12 +30,13 @@
   color: #fff;
 }
 
-.anime-row__loading {
-  font-size: 1.7rem;
+.anime-row__status {
+  font-size: 1.4rem;
+  margin-left: 3rem;
 }
 
-.anime-row__empty {
-  margin-top: 3.5rem;
+.anime-row__status span {
+  color: red;
 }
 
 .hidden {

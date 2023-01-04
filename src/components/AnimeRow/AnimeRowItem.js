@@ -7,6 +7,9 @@ function AnimeItem(props) {
   const [mouseMoved, setMouseMoved] = useState(false);
   const navigate = useNavigate();
 
+  // navigate to the selected title
+  // but ensure it doesn't happen just while dragging
+  // the slider
   const handleClick = () => {
     if (!mouseMoved) {
       navigate(`/anime/${props.id}`);
@@ -20,11 +23,12 @@ function AnimeItem(props) {
     return title.substring(20, 0) + "...";
   };
 
+  // gets id of the currently hovered title
+  // that 'll be used for displaying full name
+  // of the proper anime
   const handleMouseOver = (e) => {
-    console.log(e.target.offsetParent.id);
     setHoveredId(e.target.offsetParent.id);
   };
-
   const handleMouseOut = () => {
     setHoveredId("");
   };

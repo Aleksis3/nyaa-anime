@@ -17,18 +17,13 @@
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
+  position: relative;
 }
 
-/* .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modal-close {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  font-size: 1.4rem;
+  padding: 0.1rem;
 }
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-} */

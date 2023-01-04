@@ -4,13 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase";
 import AuthContext from "../../context/AuthContext";
 import Button from "../Button/Button";
-import { useState } from "react";
 function Header() {
   const user = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [query, setQuery] = useState();
-
+  // navigate to search component with user input
+  // included in the param, afterwards clear input
+  // and move focus out of the element
   const searchInputHandler = (e) => {
     if (e.key === "Enter") {
       navigate(`/search/${e.target.value}`);

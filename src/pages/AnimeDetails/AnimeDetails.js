@@ -11,30 +11,23 @@ function AnimeDetails() {
   const [error, setError] = useState();
   const { animeId } = useParams();
 
-  console.log(animeData);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetch(`https://api.jikan.moe/v4/anime/${animeId}`);
-
         if (!data.ok) {
           const e = await data.json();
           throw e;
         }
-
         const json = await data.json();
         setAnimeData(json.data);
         window.scrollTo(0, 0);
       } catch (e) {
         setError(e.message);
-        console.log(e.message);
       }
     };
     fetchData();
   }, [animeId]);
-
-  console.log(animeData);
 
   if (error) {
     return <p className={styles["anime-details__error"]}>Error: {error}</p>;

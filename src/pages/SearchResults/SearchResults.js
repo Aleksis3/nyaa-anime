@@ -8,6 +8,7 @@ function SearchResults() {
   const params = useParams();
   const query = params.query;
 
+  // fetch data using the query parameter from the URL
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,6 +26,8 @@ function SearchResults() {
     fetchData();
   }, [query]);
 
+  // iterate through the returned items
+  // and show a separate element for each of them
   const searchItemsEls = titles.map((title) => {
     return (
       <SearchResultItem

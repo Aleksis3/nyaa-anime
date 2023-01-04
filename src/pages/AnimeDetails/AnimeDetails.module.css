@@ -75,14 +75,11 @@ span {
 
 .anime-details__form-container {
   padding: 0;
-  /* align-self: flex-end;
-  margin: 2rem 0 0 auto; */
+  width: 100%;
 }
 
 .anime-details__form-container {
   padding: 0;
-  /* align-self: flex-end;
-  margin: 2rem 0 0 auto; */
 }
 
 .anime-details__login-prompt {

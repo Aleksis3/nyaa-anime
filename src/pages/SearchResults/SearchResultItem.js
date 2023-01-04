@@ -12,16 +12,12 @@ function SearchResultItem(props) {
   return (
     <Link to={`/anime/${props.id}`}>
       <li className={styles.item}>
-        {/* <div className={styles["img-container"]}> */}
         <img src={props.img} className={styles.img} alt="" />
         <div className={styles.a}>
           <p className={styles.title}>{props.title}</p>
-          {/* <div className={styles.a}> */}
           <p className={styles.desc}>{shortenDesc(props.desc)}</p>
           <p className={styles.type}>{props.type}</p>
-          {/* </div> */}
         </div>
-        {/* </div> */}
       </li>
     </Link>
   );

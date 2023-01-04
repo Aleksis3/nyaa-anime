@@ -21,10 +21,9 @@ function UserList() {
     if (!user) navigate("/");
   }, [user]);
 
-  const collectionRef = collection(db, "users", `${user?.uid}`, "anime-list");
+  const userListRef = collection(db, "users", `${user?.uid}`, "anime-list");
 
-  const sort = (title) => {};
-  const q = query(collectionRef, orderBy(sortBy));
+  const q = query(userListRef, orderBy(sortBy));
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,8 +48,6 @@ function UserList() {
     setEditedAnimeId(animeId);
     setIsModalOpen((prevState) => !prevState);
   }
-
-  console.log(animeList);
 
   const animeListEls = animeList.map((anime) => {
     return (

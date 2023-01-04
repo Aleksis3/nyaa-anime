@@ -37,6 +37,7 @@ ul {
   }
 }
 
+/* change the appearance of slider arrows */
 .slick-prev:before,
 .slick-next:before {
   color: #9c2e7b;
