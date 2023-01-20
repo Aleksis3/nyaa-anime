@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 
 function UserList() {
   const [animeList, setAnimeList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editedAnimeId, setEditedAnimeId] = useState();
   const [sortBy, setSortBy] = useState("title");
@@ -19,7 +22,7 @@ function UserList() {
 
   useEffect(() => {
     if (!user) navigate("/");
-  }, [user]);
+  }, [user, navigate]);
 
   const userListRef = collection(db, "users", `${user?.uid}`, "anime-list");
 
@@ -38,11 +41,12 @@ function UserList() {
           }
         });
       } catch (e) {
-        alert(e.message);
+        setError(e.message);
       }
+      setLoading(false);
     };
     fetchData();
-  }, [sortBy, sortOrder]);
+  }, [sortBy, sortOrder, q]);
 
   function handleShowModal(animeId) {
     setEditedAnimeId(animeId);
@@ -65,6 +69,14 @@ function UserList() {
       />
     );
   });
+
+  if (loading) {
+    return <h1>Loading data...</h1>;
+  }
+
+  if (error) {
+    return <h1>Error: {error}</h1>;
+  }
 
   return (
     <div style={{ overflowX: "auto" }}>

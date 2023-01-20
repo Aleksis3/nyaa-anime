@@ -9,7 +9,9 @@ function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const user = useContext(AuthContext);
+
   const navigate = useNavigate();
   const register = () => {
     if (!name) return alert("Please enter name");
@@ -21,10 +23,11 @@ function Register() {
     }
     registerWithEmailAndPassword(name, email, password);
   };
+
   useEffect(() => {
     // if (loading) return;
     if (user) navigate("/", { replace: true });
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className={styles["form"]}>

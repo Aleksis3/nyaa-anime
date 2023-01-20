@@ -9,6 +9,7 @@ import AnimeList from "./pages/AnimeList/AnimeList";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import Footer from "./components/Footer/Footer";
 import NotFound from "./pages/NotFound/NotFound";
+
 function App() {
   return (
     <div className="App">

@@ -12,7 +12,7 @@ function Login() {
 
   useEffect(() => {
     if (user) navigate("/");
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className={styles["form"]}>
@@ -37,7 +37,6 @@ function Login() {
         >
           Login
         </button>
-
         <p className={styles["form__switch-form"]}>
           Don't have an account? <Link to="/register">Register now </Link>
         </p>

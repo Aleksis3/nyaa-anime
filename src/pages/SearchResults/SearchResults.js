@@ -5,6 +5,7 @@ import SearchResultItem from "./SearchResultItem";
 function SearchResults() {
   const [titles, setTitles] = useState([]);
   const [isLoading, setisLoading] = useState(true);
+  const [error, setError] = useState(null);
   const params = useParams();
   const query = params.query;
 
@@ -19,7 +20,7 @@ function SearchResults() {
         const json = await data.json();
         setTitles(json.data);
       } catch (e) {
-        alert(e.message);
+        setError(e.message);
       }
       setisLoading(false);
     };
@@ -39,7 +40,6 @@ function SearchResults() {
       />
     );
   });
-  console.log(titles);
 
   return (
     <div className={styles.results}>
@@ -56,12 +56,13 @@ function SearchResults() {
           <ul className={styles["results__list"]}>{searchItemsEls}</ul>
         </>
       )}
-      {!titles.length && !isLoading && (
+      {!titles.length && !isLoading && !error && (
         <h1 className={styles["results__title"]}>
           Sadly, there doesn't seem to be any titles matching the searched
           phrase
         </h1>
       )}
+      {error && <h1 className={styles["results__title"]}>Error: {error}</h1>}
     </div>
   );
 }
